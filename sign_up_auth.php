@@ -1,39 +1,45 @@
 <?php
 
-function connect_to_mysql_db() {
-  $servername = "db";
-  $username = "root";
-  $password = "example";
-  $db = "forum";
+include "./functions.php";
 
-  // Create connection
-  $conn = mysqli_connect($servername, $username, $password, $db);
-  if (!$conn) {
-    die('Could not connect: ' . mysql_error());
+
+function insert_new_user_int_db($email, $password) {
+  $conn = connect_to_db();
+      if (!$conn) {
+        die('Could not connect: ' . mysql_error());
+      }
+      echo 'Connected successfully';
+
+
+
+  // Add new User to db
+  $sql = "INSERT INTO Users (email, password)
+  VALUES ('$email', '$password')";
+
+
+
+  if (mysqli_query($conn, $sql)) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
   }
-  echo 'Connected successfully';
-
-  $sql = "INSERT INTO Users (name, password)
-  VALUES ('Will Smith', 'Texastav123')";
-
-if (mysqli_query($conn, $sql)) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
 
   mysqli_close($conn);
 
 }
 
-// $name = $_POST["name"];
-// $password = $_POST["password"];
+
+
+insert_new_user_int_db($_POST["email"], $_POST["password"]);
 
 
 
 
 
-connect_to_mysql_db();
+
+
+
+
 
 
 
