@@ -3,12 +3,12 @@
 include "../functions.php";
 
 
-function insert_new_user_into_db($email, $password) {
+function login($email, $password) {
   $conn = connect_to_db();
   if (!$conn) {
     die('Could not connect: ' . mysql_error());
   }
-  echo 'Connected successfully';
+  echo 'Connected successfully' . "<br>";
 
   // Query column email
   $sql_check_email = "SELECT email FROM Users WHERE email = '$email'";
@@ -20,9 +20,13 @@ function insert_new_user_into_db($email, $password) {
 
   // Check if email and password already exists
   if(mysqli_num_rows($result_email) == 0 && mysqli_num_rows($result_password) == 0) {
-    echo "Email and Password are available";
+    $sql = "INSERT INTO Users (email, passwort) VALUES ('$email', '$password')";
+    mysqli_query($conn, $sql);
+    echo "A new User is created";
+  } elseif(mysqli_num_rows($result_email) == 1 && mysqli_num_rows($result_password) == 1) {
+    echo "Login succeeded";
   } else {
-    echo "Email or Password are not available";
+    echo "Password or Email is not corrected";
   }
 
 
@@ -32,7 +36,7 @@ function insert_new_user_into_db($email, $password) {
 
 
 
-insert_new_user_into_db($_POST["email"], $_POST["password"]);
+login($_POST["email"], $_POST["password"]);
 
 
 
