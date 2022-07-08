@@ -10,23 +10,28 @@ function login($email, $password) {
   }
   echo 'Connected successfully' . "<br>";
 
+  $encrypted_pw = openssl_encrypt($password, "AES-128-CTR", "$email", 0, '1234567891011121');
+  // $decrypted_pw = openssl_decrypt($encrypted_pw, "AES-128-CTR", "$email", 0, '1234567891011121');
+
+
   // Query column email
-  $sql_check_email = "SELECT email FROM Users WHERE email = '$email'";
+  $sql_check_email = "SELECT email FROM user WHERE email = '$email'";
   $result_email = mysqli_query($conn, $sql_check_email);
 
   // Query column passwort
-  $sql_check_password = "SELECT passwort FROM Users WHERE passwort = '$password'";
+  $sql_check_password = "SELECT passwort FROM user WHERE passwort = '$encrypted_pw'";
   $result_password = mysqli_query($conn, $sql_check_password);
+
 
   // Check if email and password already exists
   if(mysqli_num_rows($result_email) == 0 && mysqli_num_rows($result_password) == 0) {
-    $sql = "INSERT INTO Users (email, passwort) VALUES ('$email', '$password')";
+    $sql = "INSERT INTO user (email, passwort) VALUES ('$email', '$encrypted_pw')";
     mysqli_query($conn, $sql);
     echo "A new User is created";
   } elseif(mysqli_num_rows($result_email) == 1 && mysqli_num_rows($result_password) == 1) {
     echo "Login succeeded";
   } else {
-    echo "Password or Email is not corrected";
+    echo "Password or Email is not correct";
   }
 
 
