@@ -27,8 +27,9 @@
           if(mysqli_num_rows($result_email)) {
             echo "Email exist" . "<br>";
             while($rows = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-              $password = $rows["passwort"];
-              $show_password = openssl_decrypt($password, "AES-128-CTR", "$email", 0, '1234567891011121');
+              $password = $rows["password"];
+              // $show_password = openssl_decrypt($password, "AES-128-CTR", "$email", 0, '1234567891011121');
+              $show_password = $password;
             }
             echo "<b>This is your Passwort:</b>". $show_password;
           } else {

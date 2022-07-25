@@ -12,7 +12,7 @@ $body = $_POST["body"];
 $user_id = 40;
 $author = "test@mailStackfuel.com";
 
-$generate_ids = uniqid();
+// $generate_ids = uniqid();
 //    echo $generate_ids;
 
 
@@ -22,8 +22,8 @@ $conn = connect_to_db();
   }
   echo 'Connected successfully' . "<br>";
 
-  $sql = "INSERT INTO post (id, parent_id, `user_id`, author, subject, body)
-  VALUES (12, 34, 24, $author, $subject, $body)";
+  $sql = "INSERT INTO thread (`user_id`,`body`, `subject`)
+  VALUES (40, 'Das ist ein body', 'das ist ein Subject');";
 
 
 if(mysqli_query($conn, $sql)) {
