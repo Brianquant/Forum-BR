@@ -9,6 +9,8 @@
 <body>
     <?php
           include "../functions.php";
+          include_once "../threads_and _posts/session_management.php";
+
 
           $show_password = null;
           $email = $_POST["email"];

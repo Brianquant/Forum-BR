@@ -1,6 +1,7 @@
 <?php
 
 include "../functions.php";
+include_once "../threads_and _posts/session_management.php";
 
 // $author = $_POST["author"];
 
@@ -22,8 +23,8 @@ $conn = connect_to_db();
   }
   echo 'Connected successfully' . "<br>";
 
-  $sql = "INSERT INTO thread (`user_id`,`body`, `subject`)
-  VALUES (40, 'Das ist ein body', 'das ist ein Subject');";
+  $sql = "INSERT INTO post (`thread_id` ,`user_id` , `body`)
+  VALUES (10, 43, 'Ich bin ein Post')";
 
 
 if(mysqli_query($conn, $sql)) {
@@ -33,9 +34,11 @@ if(mysqli_query($conn, $sql)) {
 }
 
 
-
-
 mysqli_close($conn);
+
+
+
+
 
 
 ?>

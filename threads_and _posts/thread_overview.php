@@ -8,13 +8,19 @@
 </head>
 <body>
 
-    <?php $user_id_active = 43; ?>
     <h3>Your active Threads</h3>
+    <?php
+    session_start();
+    $user_id_active = $_SESSION["user_id"];
+     ?>
     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
     <p>
         <label for="user_id">Show only my threads</label>
         <!-- ToDo: Get user id from session -->
-        <input type="checkbox" name="user_id_same" value="<?php echo $user_id_active ?>">
+        <input
+            type="checkbox"
+            name="user_id_same"
+            value="<?php echo $user_id_active; ?>">
         <input type="submit" value="Show threads">
     </p>
     </form>
@@ -32,6 +38,8 @@
     // echo $user_int_id_other . "<br>";
 
 
+
+
     $conn = connect_to_db();
 
 
@@ -43,7 +51,7 @@
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                echo "<br>" . "<b>User id: </b>" . $row["user_id"]. "<br>" . "<b>Body: </b> " . $row["body"]. "<br>" . "<b>Subject: </b> " . $row["subject"]. "<br>" . "--------------------------------------";
+                echo "<br>" . "<b>User id: </b>" . $row["user_id"]. "<br>" . "<b>Subject: </b> " . $row["subject"]. "<br>" . "<b>Body: </b> " . $row["body"]. "<br>" . "--------------------------------------";
             }
         } else {
             echo "0 results";
@@ -61,7 +69,7 @@
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-            echo "<b>User id: </b>" . $row["user_id"]. "<br>" . "<b>Body: </b> " . $row["body"]. "<br>" . "<b>Subject: </b> " . $row["subject"]. "<br>" . "--------------------------------------" . "<br>";
+            echo "<b>User id: </b>" . $row["user_id"]. "<br>" . "<b>Subject: </b> " . $row["subject"]. "<br>" . "<b>Body: </b> " . $row["body"]. "<br>" . "--------------------------------------" . "<br>";
             }
         } else {
             echo "0 results";
@@ -71,7 +79,7 @@
     }
 
 
-    if($user_int_id_same === $user_id_active) {
+    if($user_int_id_same == $user_id_active) {
         get_my_threads($conn, $user_int_id_same);
     } else {
         get_other_threads($conn, $user_int_id_other);

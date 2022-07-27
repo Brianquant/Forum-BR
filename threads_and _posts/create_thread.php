@@ -9,21 +9,29 @@
 <body>
     <h3>Create a Thread</h3>
     <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-        <p><input type="text" name="user_id"> User_id</p>
+    <!-- Resolve Bug: Form fires the submit event before even sending a message -->
+    <!-- ToDo: Check for length in input fields and execute according actions -->
         <p><input type="text" name="subject"> Subject</p>
         <p><input type="text" name="body"> Body</p>
         <p><input type="submit" value="Submit"></p>
     </form>
+    <a href="http://localhost:8080/Forum-BR/login/login_mask.php">Login Maske</a>
+
 
 
     <?php
 
+
+    session_start();
+    $user_id = $_SESSION["user_id"];
     include "../functions.php";
 
     $subject = $_POST["subject"];
     $body = $_POST["body"];
     //ToDo: Get the User Id via session
-    $user_id = $_POST["user_id"];
+
+
+
 
     $conn = connect_to_db();
     if (!$conn) {
@@ -41,10 +49,18 @@
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
-
-
-
     mysqli_close($conn);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
