@@ -1,3 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <nav>
+        <ul>
+            <li><a href="http://localhost:8080/Forum-BR/login/login_mask.php">Login</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/threads_and%20_posts/create_thread.php">Create Thread</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/threads_and%20_posts/thread_overview.php">Thread Overview</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/login/account.php">Verify account</a></li>
+        </ul>
+  </nav>
+
+
 <?php
 
 include "../functions.php";
@@ -39,8 +60,7 @@ function login($email, $password) {
           $login_user_id = $row["id"];
           session_start();
           $_SESSION["user_id"] = $login_user_id;
-          echo $login_user_id;
-          echo "<a href='http://localhost:8080/Forum-BR/threads_and%20_posts/create_thread.php'>Go to Thread</a>";
+          echo "<br>" . "Login in User ID: " . $login_user_id;
         }
       }
     }
@@ -63,20 +83,23 @@ login($_POST["email"], $_POST["password"]);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,9 +7,22 @@
     <title>User acoount</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="http://localhost:8080/Forum-BR/login/login_mask.php">Login</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/threads_and%20_posts/create_thread.php">Create Thread</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/threads_and%20_posts/thread_overview.php">Thread Overview</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/login/account.php">Verify account</a></li>
+        </ul>
+    </nav>
     <?php
           include "../functions.php";
           include_once "../threads_and _posts/session_management.php";
+
+
+          session_start();
+          unset($_SESSION["user_id"]);
+
 
 
           $show_password = null;

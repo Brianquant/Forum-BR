@@ -7,7 +7,14 @@
     <title>Thread Overview</title>
 </head>
 <body>
-
+    <nav>
+        <ul>
+            <li><a href="http://localhost:8080/Forum-BR/login/login_mask.php">Login</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/threads_and%20_posts/create_thread.php">Create Thread</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/threads_and%20_posts/thread_overview.php">Thread Overview</a></li>
+            <li><a href="http://localhost:8080/Forum-BR/login/account.php">Verify account</a></li>
+        </ul>
+    </nav>
     <h3>Your active Threads</h3>
     <?php
     session_start();
@@ -51,7 +58,10 @@
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                echo "<br>" . "<b>User id: </b>" . $row["user_id"]. "<br>" . "<b>Subject: </b> " . $row["subject"]. "<br>" . "<b>Body: </b> " . $row["body"]. "<br>" . "--------------------------------------";
+                echo "<br>" . "<b>User id: </b>" . $row["user_id"]. "<br>" .
+                "<b>Subject: </b> " . $row["subject"]. "<br>" .
+                "<b>Body: </b> " . $row["body"].
+                "<br>" . "--------------------------------------";
             }
         } else {
             echo "0 results";
@@ -69,7 +79,10 @@
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-            echo "<b>User id: </b>" . $row["user_id"]. "<br>" . "<b>Subject: </b> " . $row["subject"]. "<br>" . "<b>Body: </b> " . $row["body"]. "<br>" . "--------------------------------------" . "<br>";
+            echo "<b>User id: </b>" . $row["user_id"]. "<br>" .
+            "<b>Subject: </b> " . $row["subject"]. "<br>" .
+            "<b>Body: </b> " . $row["body"].
+            "<br>" . "--------------------------------------" . "<br>";
             }
         } else {
             echo "0 results";
