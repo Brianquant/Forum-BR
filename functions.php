@@ -16,6 +16,14 @@ function connect_to_db() {
     echo "<pre>" . $input . "</pre>";
   }
 
+function myDump($input) {
+  print("<pre>");
+    print("<code>");
+        print_r($input);
+    print("</code>");
+  print("</pre>");
+}
+
 
 
 

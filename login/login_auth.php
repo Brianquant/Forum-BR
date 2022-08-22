@@ -44,7 +44,7 @@ function login($email, $password) {
   $sql_check_password = "SELECT `password` FROM user WHERE `password` = '$password'";
   $result_password = mysqli_query($conn, $sql_check_password);
 
-  // Check if email and password already exists
+  // Check if email and password already existslogin_user_id
   if(mysqli_num_rows($result_email) == 0 && mysqli_num_rows($result_password) == 0) {
     $sql = "INSERT INTO user (`email`, `password`) VALUES ('$email', '$password')";
     mysqli_query($conn, $sql);

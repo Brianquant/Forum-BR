@@ -24,18 +24,20 @@
         <p><input class="subject-post" type="text" name="body"> Body</p>
         <p><input type="submit" value="Submit"></p>
     </form>
-    <a href="http://localhost:8080/Forum-BR/login/login_mask.php">Login Maske</a>
 
     <?php
 
+
+
     session_start();
     $user_id = $_SESSION["user_id"];
-    echo $user_id;
+    echo "User: " . $user_id . " is logged in";
+
+    // Imports
     include "../functions.php";
 
     $subject = $_POST["subject"];
     $body = $_POST["body"];
-    //ToDo: Get the User Id via session
 
 
 
@@ -44,17 +46,22 @@
     if (!$conn) {
      die('Could not connect: ' . mysql_error());
     }
-    echo 'Connected successfully' . "<br>";
+
 
     $sql = "INSERT INTO thread (`user_id`,`body`, `subject`)
-        VALUES ($user_id, '$body', '$subject');";
+        VALUES ($user_id, '$body', '$subject')";
 
 
-    if(mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
+    if(strlen($subject) > 0 && strlen($body) > 0) {
+        if(mysqli_query($conn, $sql)) {
+            echo "<br>" . "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        return null;
     }
+
 
     mysqli_close($conn);
 

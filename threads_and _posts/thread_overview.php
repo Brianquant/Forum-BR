@@ -71,18 +71,23 @@
     }
 
 
+
+
     function get_other_threads($conn, $user_id_active) {
         $query = "SELECT * from thread WHERE NOT `user_id`=$user_id_active";
-
         $result = mysqli_query($conn, $query);
+
 
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-            echo "<b>User id: </b>" . $row["user_id"]. "<br>" .
-            "<b>Subject: </b> " . $row["subject"]. "<br>" .
-            "<b>Body: </b> " . $row["body"].
-            "<br>" . "--------------------------------------" . "<br>";
+            echo "<p><b>User id: </b>" . $row["user_id"]. "</p>" .
+            "<p><b>Thread id: </b> " . $row["id"] . "</p>" .
+            "<p><b>Subject: </b> " . $row["subject"] . "</p>" .
+            "<p><b>Body: </b> " . $row["body"] . "</p>" .
+            "<a href=" . "http://localhost:8080/Forum-BR/threads_and%20_posts/create_post.php?id=" . $row["id"] . ">Create a Post</a>"
+            . "<br>" .
+            "--------------------------------------" . "<br>";
             }
         } else {
             echo "0 results";
