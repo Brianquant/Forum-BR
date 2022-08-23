@@ -22,8 +22,6 @@
 <?php
 
 include "../functions.php";
-// include "../threads_and _posts/session_management.php";
-
 
 function login($email, $password) {
   $conn = connect_to_db();
@@ -32,8 +30,7 @@ function login($email, $password) {
   }
   echo 'Connected successfully' . "<br>";
 
-  // $encrypted_pw = openssl_encrypt($password, "AES-128-CTR", "$email", 0, '1234567891011121');
-  // $decrypted_pw = openssl_decrypt($encrypted_pw, "AES-128-CTR", "$email", 0, '1234567891011121');
+  $encryptedString = encrypt_decrypt('encrypt', $password);
 
 
   // Query column email
@@ -41,14 +38,14 @@ function login($email, $password) {
   $result_email = mysqli_query($conn, $sql_check_email);
   $login_user_id = null;
   // Query column passwort
-  $sql_check_password = "SELECT `password` FROM user WHERE `password` = '$password'";
+  $sql_check_password = "SELECT `password` FROM user WHERE `password` = '$encryptedString'";
   $result_password = mysqli_query($conn, $sql_check_password);
 
   // Check if email and password already existslogin_user_id
   if(mysqli_num_rows($result_email) == 0 && mysqli_num_rows($result_password) == 0) {
-    $sql = "INSERT INTO user (`email`, `password`) VALUES ('$email', '$password')";
+    $sql = "INSERT INTO user (`email`, `password`) VALUES ('$email', '$encryptedString')";
     mysqli_query($conn, $sql);
-    echo "A new User is created";
+    echo "Your account is created, please login again";
   } elseif(mysqli_num_rows($result_email) == 1 && mysqli_num_rows($result_password) == 1) {
     echo "Login succeeded";
     // Get the user id according to the entered email address

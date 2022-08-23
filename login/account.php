@@ -17,17 +17,13 @@
     </nav>
     <?php
           include "../functions.php";
-          include_once "../threads_and _posts/session_management.php";
-
 
           session_start();
           unset($_SESSION["user_id"]);
 
 
-
           $show_password = null;
           $email = $_POST["email"];
-          // echo "Email: " . $email;
           $password = null;
 
 
@@ -43,10 +39,9 @@
             echo "Email exist" . "<br>";
             while($rows = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
               $password = $rows["password"];
-              // $show_password = openssl_decrypt($password, "AES-128-CTR", "$email", 0, '1234567891011121');
-              $show_password = $password;
+              $show_password = encrypt_decrypt('decrypt', $password);
             }
-            echo "<b>This is your Passwort:</b>". $show_password;
+            echo "<b>This is your Passwort: </b>". $show_password;
           } else {
              echo "Email does not exist";
           }

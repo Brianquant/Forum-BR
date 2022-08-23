@@ -60,7 +60,9 @@
             while($row = mysqli_fetch_assoc($result)) {
                 echo "<br>" . "<b>User id: </b>" . $row["user_id"]. "<br>" .
                 "<b>Subject: </b> " . $row["subject"]. "<br>" .
-                "<b>Body: </b> " . $row["body"].
+                "<b>Body: </b> " . $row["body"] .
+                "<br>" .
+                "<a href=" . "http://localhost:8080/Forum-BR/threads_and%20_posts/create_post.php?id=" . $row["id"] . ">Create a Post</a>" .
                 "<br>" . "--------------------------------------";
             }
         } else {
